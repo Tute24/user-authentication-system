@@ -6,11 +6,13 @@ export default function Login(){
     return(
         <>
         <div>
-            <label htmlFor="email">Your E-mail: </label>
-            <input type="email" id="email" name="user_email" value={registeredUserData.email} placeholder="Log in with your e-mail"/>
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="user_password" value={registeredUserData.password} placeholder="Type your password"/>
-            <button type="submit" id="loginButton" >Log In</button>
+            <form>
+                <label htmlFor="email">Your E-mail: </label>
+                <input type="email" id="email" name="user_email" placeholder="Log in with your e-mail"/>
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="user_password" placeholder="Type your password"/>
+                <button type="submit" id="loginButton" >Log In</button>
+            </form>
         </div>
         <div>
             <span>
