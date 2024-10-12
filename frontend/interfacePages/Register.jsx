@@ -33,7 +33,7 @@ function handleFormSubmit(e){
         setStatusMessage('Passwords must be equal!')
     } else{
         try{
-            axios.post('/register',registeredUserData)
+            axios.post('http://localhost:3000/register',registeredUserData)
             console.log('Cadastro feito com sucesso!')
         } catch(error){
             setStatusMessage('Cadastro não funcionou!')
