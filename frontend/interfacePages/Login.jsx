@@ -22,7 +22,7 @@ function handleLoginSubmit(e){
     e.preventDefault()
 
     try{
-        axios.post('/login',loginUserData)
+        axios.post('http://localhost:3000/login',loginUserData)
     } catch (error){
         setStatusMessage(`There's something wrong with your request!`)
     }
