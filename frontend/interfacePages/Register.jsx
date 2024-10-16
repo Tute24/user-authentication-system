@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 
+
 export default function Register(){
 
 const [registeredUserData,setRegisteredUserData] = useState({
@@ -26,17 +27,24 @@ function handleInputChange (e){
     )
 }
 
-function handleFormSubmit(e){
+async function handleFormSubmit(e){
     e.preventDefault()
 
     if(registeredUserData.password !== confirmPassword){
         setStatusMessage('Passwords must be equal!')
     } else{
         try{
-            axios.post('http://localhost:3000/register',registeredUserData)
-            console.log('Cadastro feito com sucesso!')
+           const response = await axios.post('http://localhost:3000/register',registeredUserData)
+            if(response.status === 201){
+                setStatusMessage('New user successfully registered!')
+            }
         } catch(error){
-            setStatusMessage('Cadastro não funcionou!')
+            if(error.response && error.response.status === 400){
+                setStatusMessage('This email already belongs to an existing user!')
+            } else if(error.response && error.response.status === 500){
+                setStatusMessage('Server error')
+            }
+            
         }
     } 
 }
