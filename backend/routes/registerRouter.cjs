@@ -1,9 +1,15 @@
 const express = require('express')
+const mongoose = require('mongoose')
+
+
+
 
 const router = express.Router()
 
 router.post('/register', (req, res) =>{
-    console.log(req.body)
+   const {email, password} = req.body
+
+
 })
 
 module.exports = router

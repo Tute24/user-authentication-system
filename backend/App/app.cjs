@@ -3,6 +3,12 @@ const registerRouter = require('../routes/registerRouter.cjs')
 const loginRouter = require("../routes/loginRouter.cjs")
 const cors = require ('cors')
 const app = express()
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost:27017/authdb',{
+    useNewUrlParser: true,
+    useUnifiedTopology:true,
+})
 
 app.use(cors())
 app.use(express.json())
