@@ -12,10 +12,13 @@ router.post('/register', async (req, res) =>{
    if(checkExistentUser){
     return res.status(400).json({message: "This email already belongs to an existing user!"})
    } else{
+
+    // Hash the password and put it in a const (bcrypt.hash(password,10))
     try{
         const newUser = new User({
             email,
             password
+            // Put the hashed password here after changing the schema for User structure. Only the hashed password is needed in the schema
         })
 
         await newUser.save()
