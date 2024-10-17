@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login(){
@@ -8,6 +8,10 @@ const [loginUserData,setloginUserData] = useState({
         email: "",
         password:""
 })
+
+const navigate = useNavigate()
+
+const [authenticatedRoute, setAuthenticatedRoute] = useState('')
 
 const [statusMessage,setStatusMessage] = useState('')
 
@@ -18,13 +22,19 @@ function handleLoginInputChange(e){
     })
 }
 
-function handleLoginSubmit(e){
+async function handleLoginSubmit(e){
     e.preventDefault()
 
     try{
-        axios.post('http://localhost:3000/login',loginUserData)
+       const response = await axios.post('http://localhost:3000/login',loginUserData)
+         
+       if(response.status === 201){
+        navigate('/dashboard')
+       }
     } catch (error){
-        setStatusMessage(`There's something wrong with your request!`)
+        if(error.response && error.response.status === 401){
+            setStatusMessage(`Incorrect email/password! Try again.`)
+        }   
     }
 }
 
