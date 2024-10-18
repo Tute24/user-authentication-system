@@ -25,18 +25,16 @@ function handleLoginInputChange(e){
 async function handleLoginSubmit(e){
     e.preventDefault()
 
-    try{
        const response = await axios.post('http://localhost:3000/login',loginUserData)
-         
-       if(response.status === 201){
+       const token = response.data.token
+       if(!token){
+        setStatusMessage("Email e/ou senha incorretos. Usuário não autorizado!")
+       } else{
+        localStorage.setItem("token",JSON.stringify(token))
         navigate('/dashboard')
-       }
-    } catch (error){
-        if(error.response && error.response.status === 401){
-            setStatusMessage(`Incorrect email/password! Try again.`)
-        }   
+       }  
     }
-}
+
 
     return(
         <>
