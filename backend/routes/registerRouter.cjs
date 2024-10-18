@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../Schemas/schema.cjs')
+const bcrypt = require('bcrypt')
 
 const router = express.Router()
 
@@ -13,12 +14,11 @@ router.post('/register', async (req, res) =>{
     return res.status(400).json({message: "This email already belongs to an existing user!"})
    } else{
 
-    // Hash the password and put it in a const (bcrypt.hash(password,10))
+    const hashedPassword = await bcrypt.hash(password,10)
     try{
         const newUser = new User({
             email,
-            password
-            // Put the hashed password here after changing the schema for User structure. Only the hashed password is needed in the schema
+            password: hashedPassword
         })
 
         await newUser.save()
