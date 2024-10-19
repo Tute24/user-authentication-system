@@ -44,7 +44,7 @@ router.post('/update',isAuthenticated,async (req,res)=>{
             await authUser.save()
         } 
         const newToken = jwt.sign({email: authUser.email},process.env.SECRET_KEY)
-            return res.json({message: "User Updated Successfully",token: newToken})
+            return res.json({message: "User Updated Successfully",token: newToken, updatedUser: authUser})
     } 
     catch(error){
         res.status(500).json({message:"Server Error"})

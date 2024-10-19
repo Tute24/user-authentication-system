@@ -58,7 +58,9 @@ function handleUpdateInputChange(e){
         }
     )
         const newToken = response.data.token
+        setDisplay(response.data.updatedUser.email)
         localStorage.setItem('token',JSON.stringify(newToken))
+        setDisplayUpdateForm(false)
 }
     catch(error){
         console.log(error)
