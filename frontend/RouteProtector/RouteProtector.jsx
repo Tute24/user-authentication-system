@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom"
 
-export default function RouteProtector({children}){
+export default  function RouteProtector({children}){
     const token = localStorage.getItem("token")
     if(!token){
         return(

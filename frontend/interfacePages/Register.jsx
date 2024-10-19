@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 
 
 export default function Register(){
@@ -12,6 +13,8 @@ const [registeredUserData,setRegisteredUserData] = useState({
 const [confirmPassword,setConfirmPassword] = useState('')
 
 const [statusMessage,setStatusMessage] = useState('')
+
+const navigate = useNavigate()
 
 function handleConfirmPassword(e){
     setConfirmPassword(e.target.value)
@@ -34,10 +37,11 @@ async function handleFormSubmit(e){
         setStatusMessage('Passwords must be equal!')
     } else{
         try{
-           const response = await axios.post('http://localhost:3000/register',registeredUserData)
-            if(response.status === 201){
-                setStatusMessage('New user successfully registered!')
-            }
+            const response = await axios.post('http://localhost:3000/register',registeredUserData)
+            const token = response.data.token
+            localStorage.setItem('token',JSON.stringify(token))
+            navigate('/dashboard')
+            
         } catch(error){
             if(error.response && error.response.status === 400){
                 setStatusMessage('This email already belongs to an existing user!')
