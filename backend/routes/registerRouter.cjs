@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../Schemas/schema.cjs')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const router = express.Router()
 
@@ -22,7 +23,8 @@ router.post('/register', async (req, res) =>{
         })
 
         await newUser.save()
-        return res.status(201).json({message: "New user successfully registered!"})
+        const token = jwt.sign({email: newUser.email},process.env.SECRET_KEY)
+        return res.status(201).json({message: "New user successfully registered!", token: token})
 
     } catch(error){
         return res.status(500).json({message: 'Server error'})
