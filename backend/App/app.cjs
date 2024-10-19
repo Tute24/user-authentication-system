@@ -20,10 +20,7 @@ app.use(express.json())
 app.use(loginRouter)
 app.use(registerRouter)
 app.use(dashRouter)
-
-
-
-
+app.use(updateRouter)
 
 app.listen(3000, ()=>{
     console.log('Server initialized.')

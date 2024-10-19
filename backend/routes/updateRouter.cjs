@@ -23,7 +23,7 @@ async function isAuthenticated(req,res, next){
 }
 
 router.post('/update',isAuthenticated,async (req,res)=>{
-    const {email} = req.payLoad.email
+    const {email} = req.payLoad
     const {submittedEmail, submittedPassword} = req.body
 
     try{
@@ -50,3 +50,5 @@ router.post('/update',isAuthenticated,async (req,res)=>{
         res.status(500).json({message:"Server Error"})
     }
 })
+
+module.exports = router

@@ -6,8 +6,8 @@ export default function Dashboard(){
     const[display,setDisplay] = useState('')
     const[displayUpdateForm,setDisplayUpdateForm] = useState(false)
     const[updateUserData,setUpdateUserData]=useState({
-        name: '',
-        password: ''
+        submittedEmail: '',
+        submittedPassword: ''
     })
     
     useEffect(()=>{
@@ -52,12 +52,15 @@ function handleUpdateInputChange(e){
     if(token){
     try{
         const response = await axios.post('http://localhost:3000/update',updateUserData, {headers:
-        {
-            'Authorization': `Bearer ${token}`
+            {
+                'Authorization':`Bearer ${token}`
+            }
         }
-    }
-)
-    }catch(error){
+    )
+        const newToken = response.data.token
+        localStorage.setItem('token',JSON.stringify(newToken))
+}
+    catch(error){
         console.log(error)
     }}
  }
@@ -80,9 +83,9 @@ function handleUpdateInputChange(e){
                 </div>
                 <form onSubmit={handleUpdateSubmit}>
                     <label htmlFor="email">Type your current email/new email</label>
-                    <input type="email" id="email" name="email" value={updateUserData.email} required onChange={handleUpdateInputChange}/>
+                    <input type="email" id="email" name="submittedEmail" value={updateUserData.submittedEmail} required onChange={handleUpdateInputChange}/>
                     <label htmlFor="password">Type your current password/new password</label>
-                    <input type="password" id="password" name="password" value={updateUserData.password} required onChange={handleUpdateInputChange}/>
+                    <input type="password" id="password" name="submittedPassword" value={updateUserData.submittedPassword} required onChange={handleUpdateInputChange}/>
                     <button type="submit">Submit Change</button>
                 </form>
                 </>
