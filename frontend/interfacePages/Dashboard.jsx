@@ -1,15 +1,23 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Navigate, useNavigate } from "react-router-dom"
 
 export default function Dashboard(){
 
     const[display,setDisplay] = useState('')
     const[displayUpdateForm,setDisplayUpdateForm] = useState(false)
+    const[displayDeleteForm,setDisplayDeleteForm] = useState(false)
     const[updateUserData,setUpdateUserData]=useState({
         submittedEmail: '',
         submittedPassword: ''
     })
+    const[deleteUserData,setDeleteUserData]=useState({
+        deletedEmail: '',
+        deletedPassword: ''
+    })
     
+    const navigate = useNavigate()
+
     useEffect(()=>{
 
     async function fetchUserData(){
@@ -35,7 +43,19 @@ export default function Dashboard(){
 )
 
  function handleUpdateButton(){
-    setDisplayUpdateForm(true)
+    if(displayUpdateForm){
+        setDisplayUpdateForm(false)
+    } else{
+        setDisplayUpdateForm(true)
+    }
+}
+
+function handleDeleteButton(){
+    if(displayDeleteForm){
+        setDisplayDeleteForm(false)
+    } else{
+        setDisplayDeleteForm(true)
+    }
 }
 
 function handleUpdateInputChange(e){
@@ -45,10 +65,18 @@ function handleUpdateInputChange(e){
     })
 }
 
+function handleDeleteInputChange(e){
+    setDeleteUserData({
+        ...deleteUserData,
+        [e.target.name]: e.target.value
+    })
+}
+
  async function handleUpdateSubmit(e){
     e.preventDefault()
 
     const token = JSON.parse(localStorage.getItem("token"))
+
     if(token){
     try{
         const response = await axios.post('http://localhost:3000/update',updateUserData, {headers:
@@ -67,6 +95,23 @@ function handleUpdateInputChange(e){
     }}
  }
 
+ async function handleDeleteSubmit(e){
+
+        const token = JSON.parse(localStorage.getItem('token'))
+
+        if(token){
+            try{
+                const response = await axios.post('http://localhost:3000/delete',deleteUserData,{headers:{
+                    'Authorization': `Bearer ${token}`
+                }})
+                navigate(to='/')
+            }
+            catch(error){
+                console.log(error)
+            }
+        }
+ }
+
 
     return (
         <>
@@ -74,7 +119,7 @@ function handleUpdateInputChange(e){
 
             <div>
                 <button type="button" onClick = {handleUpdateButton} >Update User Info</button>
-                <button type="button">Delete Account</button>
+                <button type="button" onClick={handleDeleteButton}>Delete Account</button>
             </div>
 
             {displayUpdateForm &&(
@@ -90,6 +135,23 @@ function handleUpdateInputChange(e){
                     <input type="password" id="password" name="submittedPassword" value={updateUserData.submittedPassword} required onChange={handleUpdateInputChange}/>
                     <button type="submit">Submit Change</button>
                 </form>
+                </>
+            )}
+
+            {displayDeleteForm &&(
+                <>
+                <div>
+                    <p>
+                        Note: If you delete your account, you won't be able to recover it. 
+                        Type your current email and password to confirm the action.
+                    </p>
+                    <form >
+                        <label htmlFor="deleteEmail">Type your account's email</label>
+                        <input type="email" required id="deleteEmail" name="deletedEmail" value={deleteUserData.deletedEmail} onChange={handleDeleteInputChange} />
+                        <label htmlFor="deletePassword">Type your password</label>
+                        <input type="password" required id="deletePassword" name="deletedPassword" value={deleteUserData.deletedPassword} onChange={handleDeleteInputChange} />
+                    </form>
+                </div>
                 </>
             )}
         </>
