@@ -116,9 +116,29 @@ function handleDeleteInputChange(e){
         }
  }
 
+ async function handleLogout(){
+    const token = JSON.parse(localStorage.getItem('token'))
+
+    if(token){
+        try{
+            const logout = await axios.get('http://localhost:3000/delete',{headers:{
+                'Authorization': `Bearer ${token}`
+            }})
+            localStorage.removeItem('token')
+            navigate('/')
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+ }
+
 
     return (
         <>
+            <nav >
+                <button type="button" onClick={handleLogout}>Logout</button>
+            </nav>
             <h2>Welcome to your dashboard page: <span>{display}</span>  </h2>
 
             <div>
