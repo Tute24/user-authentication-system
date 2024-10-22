@@ -97,6 +97,8 @@ function handleDeleteInputChange(e){
 
  async function handleDeleteSubmit(e){
 
+        e.preventDefault()
+    
         const token = JSON.parse(localStorage.getItem('token'))
 
         if(token){
@@ -104,7 +106,9 @@ function handleDeleteInputChange(e){
                 const response = await axios.post('http://localhost:3000/delete',deleteUserData,{headers:{
                     'Authorization': `Bearer ${token}`
                 }})
-                navigate(to='/')
+                if(response.status === 200){
+                    navigate('/')
+                }
             }
             catch(error){
                 console.log(error)
@@ -145,11 +149,12 @@ function handleDeleteInputChange(e){
                         Note: If you delete your account, you won't be able to recover it. 
                         Type your current email and password to confirm the action.
                     </p>
-                    <form >
+                    <form onSubmit={handleDeleteSubmit}>
                         <label htmlFor="deleteEmail">Type your account's email</label>
                         <input type="email" required id="deleteEmail" name="deletedEmail" value={deleteUserData.deletedEmail} onChange={handleDeleteInputChange} />
                         <label htmlFor="deletePassword">Type your password</label>
                         <input type="password" required id="deletePassword" name="deletedPassword" value={deleteUserData.deletedPassword} onChange={handleDeleteInputChange} />
+                        <button type="submit">Delete Account</button>
                     </form>
                 </div>
                 </>
