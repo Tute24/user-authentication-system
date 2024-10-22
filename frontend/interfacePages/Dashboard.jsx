@@ -121,11 +121,14 @@ function handleDeleteInputChange(e){
 
     if(token){
         try{
-            const logout = await axios.get('http://localhost:3000/delete',{headers:{
+            const logout = await axios.get('http://localhost:3000/logout',{headers:{
                 'Authorization': `Bearer ${token}`
             }})
-            localStorage.removeItem('token')
-            navigate('/')
+            if(logout.status === 200){
+                localStorage.removeItem('token')
+                navigate('/')
+            }
+            
         }
         catch(error){
             console.log(error)
