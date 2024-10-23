@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 export default function Register(){
 
 const [registeredUserData,setRegisteredUserData] = useState({
+        username:"",
         email: "",
         password:""
 })
@@ -55,12 +56,14 @@ async function handleFormSubmit(e){
     return(
         <>
             <form onSubmit={handleFormSubmit} >
-                <label htmlFor="newemail">Type a valid e-mail address:</label>
-                <input type="email" id="newemail" name="email" value={registeredUserData.email} onChange={handleInputChange}/>
-                <label htmlFor="newpassword">Type your password</label>
-                <input id="newpassword" name="password" type="password" value={registeredUserData.password} onChange={handleInputChange} />
-                <label htmlFor="newpasswordauth">Confirm your password:</label>
-                <input type="password" name="newpasswordauth" value={confirmPassword} onChange={handleConfirmPassword} />
+                <label htmlFor="newUser">Type your full name</label>
+                <input type="text" id="newUser" name="username" value={registeredUserData.username} onChange={handleInputChange} required/>
+                <label htmlFor="newEmail">Type a valid e-mail address:</label>
+                <input type="email" id="newEmail" name="email" value={registeredUserData.email} onChange={handleInputChange} required/>
+                <label htmlFor="newPassword">Type your password</label>
+                <input id="newPassword" name="password" type="password" value={registeredUserData.password} onChange={handleInputChange} required />
+                <label htmlFor="newPasswordauth">Confirm your password:</label>
+                <input type="password" name="newPasswordauth" value={confirmPassword} onChange={handleConfirmPassword} required />
                 <button type="submit" id="registerButton">Sign Up!</button>
             </form>
             <div>
