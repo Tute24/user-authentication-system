@@ -11,8 +11,6 @@ const [loginUserData,setloginUserData] = useState({
 
 const navigate = useNavigate()
 
-const [authenticatedRoute, setAuthenticatedRoute] = useState('')
-
 const [statusMessage,setStatusMessage] = useState('')
 
 function handleLoginInputChange(e){

@@ -31,7 +31,7 @@ export default function Dashboard(){
                 // For the isAuthenticated middleware to check the requisition, that token has to be passed on the req's headers
             }})
             const userData = getResponse.data.user
-                setDisplay(userData.email)  
+                setDisplay(userData.username)  
         }catch(error){
             console.error("Error fetching data")
             setDisplay('Error')
@@ -142,7 +142,7 @@ function handleDeleteInputChange(e){
             <nav >
                 <button type="button" onClick={handleLogout}>Logout</button>
             </nav>
-            <h2>Welcome to your dashboard page: <span>{display}</span>  </h2>
+            <h2>Welcome to your dashboard page, <span>{display}!</span>  </h2>
 
             <div>
                 <button type="button" onClick = {handleUpdateButton} >Update User Info</button>

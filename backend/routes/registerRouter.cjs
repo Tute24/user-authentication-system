@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 
 router.post('/register', async (req, res) =>{
-   const {email, password} = req.body
+   const {username, email, password} = req.body
 
    const checkExistentUser = await User.findOne({email})
 
@@ -18,6 +18,7 @@ router.post('/register', async (req, res) =>{
     const hashedPassword = await bcrypt.hash(password,10)
     try{
         const newUser = new User({
+            username,
             email,
             password: hashedPassword
         })
