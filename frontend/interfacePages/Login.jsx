@@ -29,7 +29,12 @@ async function handleLoginSubmit(e){
         setStatusMessage("Email e/ou senha incorretos. Usuário não autorizado!")
        } else{
         localStorage.setItem("token",JSON.stringify(token))
-        navigate('/dashboard')
+        const user = response.data.user
+        if(user.role === 'admin'){
+            navigate('/admin')
+        }else{
+            navigate('/dashboard')
+        }
        }  
     }
 
