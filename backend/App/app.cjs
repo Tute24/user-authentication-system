@@ -5,6 +5,7 @@ const dashRouter = require("../routes/dashRouter.cjs")
 const updateRouter = require('../routes/updateRouter.cjs')
 const deleteRouter = require('../routes/deleteRouter.cjs')
 const logoutRouter = require('../routes/logoutRouter.cjs')
+const adminRouter = require('../routes/adminRouter.cjs')
 const cors = require ('cors')
 const app = express()
 const mongoose = require('mongoose')
@@ -25,6 +26,8 @@ app.use(dashRouter)
 app.use(updateRouter)
 app.use(deleteRouter)
 app.use(logoutRouter)
+app.use(adminRouter)
+
 
 app.listen(3000, ()=>{
     console.log('Server initialized.')
