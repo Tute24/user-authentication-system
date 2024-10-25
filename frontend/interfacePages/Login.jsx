@@ -6,7 +6,7 @@ export default function Login(){
    
 const [loginUserData,setloginUserData] = useState({
         email: "",
-        password:""
+        password:"",
 })
 
 const navigate = useNavigate()

@@ -16,7 +16,7 @@ router.post('/login', async (req, res)=>{
     )
     }else{
         const token = jwt.sign({email: email},process.env.SECRET_KEY)
-        return res.json({message: "User successfully authenticated!",token: token})
+        return res.json({message: "User successfully authenticated!",token: token,user: checkAuthenticatedUser})
     }
 })
 
