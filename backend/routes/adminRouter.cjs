@@ -32,7 +32,7 @@ router.get('/admin', isAdmin, async (req,res)=>{
     
     try{
         const database = await User.find({}, "username email")
-        return res.status(200).json({message: "Success!",users: database})
+        return res.json({user: database})
     }
     catch(error){
         return res.status(500)
