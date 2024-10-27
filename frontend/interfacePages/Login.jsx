@@ -43,6 +43,10 @@ async function handleLoginSubmit(e){
         <>
         <div class='flex flex-col justify-center items-center min-h-screen bg-emerald-100'>
         <div class='font-sans p-10 text-center bg-black text-white font-semibold rounded-2xl' >
+            <div class="flex justify-between items-center -mt-5 mb-3">
+                <h2>Welcome to the User Authentication System!</h2>
+                <img class='w-8 h-8' src=".././assets/lock-img.png" alt="" />
+            </div>
             <form onSubmit={handleLoginSubmit}>
                 <div class='p-2'>
                     <label htmlFor="email">Your E-mail: </label>
