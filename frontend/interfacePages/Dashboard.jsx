@@ -47,6 +47,7 @@ export default function Dashboard(){
         setDisplayUpdateForm(false)
     } else{
         setDisplayUpdateForm(true)
+        setDisplayDeleteForm(false)
     }
 }
 
@@ -55,6 +56,7 @@ function handleDeleteButton(){
         setDisplayDeleteForm(false)
     } else{
         setDisplayDeleteForm(true)
+        setDisplayUpdateForm(false)
     }
 }
 
