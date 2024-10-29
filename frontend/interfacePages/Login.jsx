@@ -41,7 +41,7 @@ async function handleLoginSubmit(e){
 
     return(
         <>
-        <div class='flex flex-col justify-center items-center min-h-screen bg-emerald-100'>
+        <div class='flex flex-col justify-center items-center min-h-screen bg-emerald-50'>
         <div class='font-sans p-10 text-center bg-black text-white font-semibold rounded-2xl' >
             <div class="flex justify-between items-center -mt-5 mb-3">
                 <h2>Welcome to the User Authentication System!</h2>
