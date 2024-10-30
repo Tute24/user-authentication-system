@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 
 export default function Dashboard(){
 
+    const[statusMessage,setStatusMessage] = useState('')
     const[display,setDisplay] = useState('')
     const[displayUpdateForm,setDisplayUpdateForm] = useState(false)
     const[displayDeleteForm,setDisplayDeleteForm] = useState(false)
@@ -43,20 +44,52 @@ export default function Dashboard(){
 )
 
  function handleUpdateButton(){
+
+    setUpdateUserData({
+        submittedEmail: '',
+        submittedPassword: ''
+        })
+    
+    setDeleteUserData({
+        deletedEmail: '',
+        deletedPassword: ''
+    })
+
+    setStatusMessage('')
+    
     if(displayUpdateForm){
         setDisplayUpdateForm(false)
+        
     } else{
         setDisplayUpdateForm(true)
         setDisplayDeleteForm(false)
+        
     }
 }
 
 function handleDeleteButton(){
+
+    setUpdateUserData({
+        submittedEmail: '',
+        submittedPassword: ''
+    }
+)
+
+    setDeleteUserData({
+        deletedEmail: '',
+        eletedPassword: ''
+    }
+)
+
+    setStatusMessage('')
+
     if(displayDeleteForm){
         setDisplayDeleteForm(false)
+        
+        setUpdateUserData()
     } else{
         setDisplayDeleteForm(true)
-        setDisplayUpdateForm(false)
+        setDisplayUpdateForm(false)  
     }
 }
 
@@ -93,7 +126,7 @@ function handleDeleteInputChange(e){
         setDisplayUpdateForm(false)
 }
     catch(error){
-        console.log(error)
+        setStatusMessage('Could not update your infos. Check your credentials and try again.')
     }}
  }
 
@@ -113,7 +146,7 @@ function handleDeleteInputChange(e){
                 }
             }
             catch(error){
-                console.log(error)
+                setStatusMessage('Could not delete your account. Check your credentials and try again.')
             }
         }
  }
@@ -173,6 +206,9 @@ function handleDeleteInputChange(e){
                     <div class='p-5'>
                         <button class="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-4/5 mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit">Submit Change</button>
                     </div>
+                    <div class="text-red-500 text-sm">
+                        {statusMessage}
+                    </div>
                     </form>
                     </>
                 )}
@@ -195,6 +231,9 @@ function handleDeleteInputChange(e){
                         </div>
                         <div class='p-5 '>
                             <button class="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-4/5 mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit">Delete Account</button>
+                        </div>
+                        <div class="text-red-500 text-sm">
+                            {statusMessage}
                         </div>
                         </form>
                     </div>
