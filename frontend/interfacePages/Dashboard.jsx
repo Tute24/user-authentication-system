@@ -120,13 +120,19 @@ function handleDeleteInputChange(e){
             }
         }
     )
+     
         const newToken = response.data.token
-        setDisplay(response.data.updatedUser.email)
+        setDisplay(response.data.updatedUser.username)
         localStorage.setItem('token',JSON.stringify(newToken))
         setDisplayUpdateForm(false)
+        
 }
     catch(error){
-        setStatusMessage('Could not update your infos. Check your credentials and try again.')
+        if(error.response && error.response.status === 403){
+            setStatusMessage('There is already an user with this e-mail. Try again with another address.')
+        } else {
+            setStatusMessage('Could not update your infos. Check your credentials and try again.')
+        }
     }}
  }
 
@@ -174,39 +180,39 @@ function handleDeleteInputChange(e){
 
     return (
         <>
-        <div class='flex flex-col justify-center items-center min-h-screen p-4 bg-emerald-50'>
+        <div className='flex flex-col justify-center items-center min-h-screen p-4 bg-emerald-50'>
             
-            <div class='font-sans text-center bg-black text-white font-semibold rounded-2xl sm:w-3/5'>
-                <nav class='flex flex-row-reverse justify-items-end mr-2' >
-                    <button class="  bg-red-600 text-xs rounded-full py-0.5 px-2 text-black font-bold border-red-500 border-solid border-2  mt-1.5  hover:bg-red-900 focus:outline-none ring-2 ring-red-500" type="button" onClick={handleLogout}>Logout</button>
+            <div className='font-sans text-center bg-black text-white font-semibold rounded-2xl sm:w-3/5'>
+                <nav className='flex flex-row-reverse justify-items-end mr-2' >
+                    <button className="  bg-red-600 text-xs rounded-full py-0.5 px-2 text-black font-bold border-red-500 border-solid border-2  mt-1.5  hover:bg-red-900 focus:outline-none ring-2 ring-red-500" type="button" onClick={handleLogout}>Logout</button>
                 </nav>
-                <div class='p-6'>
-                <h2 class='-mt-2'>Welcome to your dashboard page, <span class='text-green-400'>{display}!</span>  </h2>
+                <div className='p-6'>
+                <h2 className='-mt-2'>Welcome to your dashboard page, <span classNameName='text-green-400'>{display}!</span>  </h2>
 
-                <div class= 'w-full flex justify-center gap-6 mt-5 mb-5'>
-                    <button class="text-sm bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2  mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="button" onClick = {handleUpdateButton} >Update User Info</button>
-                    <button class="text-sm bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2  mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="button" onClick={handleDeleteButton}>Delete Account</button>
+                <div className= 'w-full flex justify-center gap-6 mt-5 mb-5'>
+                    <button className="text-sm bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2  mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="button" onClick = {handleUpdateButton} >Update User Info</button>
+                    <button className="text-sm bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2  mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="button" onClick={handleDeleteButton}>Delete Account</button>
                 </div>
 
                 {displayUpdateForm &&(
                     <>
                     <div>
-                    <p class='break-normal text-xs text-amber-300 p-3'>Note: If you submit a different email/password than the one you're using before, they will be updated in the database. If you want to change only your email, for example, submit your new email address and your current password. The same goes for a password-only change.
+                    <p className='break-normal text-xs text-amber-300 p-3'>Note: If you submit a different email/password than the one you're using before, they will be updated in the database. If you want to change only your email, for example, submit your new email address and your current password. The same goes for a password-only change.
                     </p>
                     </div>
-                    <form class='flex flex-col ' onSubmit={handleUpdateSubmit}>
-                    <div class='p-2'>
-                        <label class='text-sm' htmlFor="email">Type your current email/new email:</label>
-                        <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 ' type="email" id="email" name="submittedEmail" value={updateUserData.submittedEmail} required onChange={handleUpdateInputChange}/>
+                    <form className='flex flex-col ' onSubmit={handleUpdateSubmit}>
+                    <div className='p-2'>
+                        <label className='text-sm' htmlFor="email">Type your current email/new email:</label>
+                        <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 ' type="email" id="email" name="submittedEmail" value={updateUserData.submittedEmail} required onChange={handleUpdateInputChange}/>
                     </div>
-                    <div class='p-2'>
-                        <label class='text-sm' htmlFor="password">Type your current password/new password:</label>
-                        <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 ' type="password" id="password" name="submittedPassword" value={updateUserData.submittedPassword} required onChange={handleUpdateInputChange}/>
+                    <div className='p-2'>
+                        <label className='text-sm' htmlFor="password">Type your current password/new password:</label>
+                        <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 ' type="password" id="password" name="submittedPassword" value={updateUserData.submittedPassword} required onChange={handleUpdateInputChange}/>
                     </div>
-                    <div class='p-5'>
-                        <button class="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-4/5 mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit">Submit Change</button>
+                    <div className='p-5'>
+                        <button className="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-4/5 mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit">Submit Change</button>
                     </div>
-                    <div class="text-red-500 text-sm">
+                    <div className="text-red-500 text-sm">
                         {statusMessage}
                     </div>
                     </form>
@@ -216,23 +222,23 @@ function handleDeleteInputChange(e){
                 {displayDeleteForm &&(
                     <>
                     <div>
-                        <p class='break-normal text-xs text-amber-300 p-3'>
+                        <p className='break-normal text-xs text-amber-300 p-3'>
                             Note: If you delete your account, you won't be able to recover it. 
                             Type your current email and password to confirm the action.
                         </p>
-                        <form class='flex flex-col' onSubmit={handleDeleteSubmit}>
-                        <div class='p-2 flex flex-col place-items-center'>
-                            <label class='text-sm' htmlFor="deleteEmail">Type your account's email:</label>
-                            <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 '  type="email" required id="deleteEmail" name="deletedEmail" value={deleteUserData.deletedEmail} onChange={handleDeleteInputChange} />
+                        <form className='flex flex-col' onSubmit={handleDeleteSubmit}>
+                        <div className='p-2 flex flex-col place-items-center'>
+                            <label className='text-sm' htmlFor="deleteEmail">Type your account's email:</label>
+                            <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 '  type="email" required id="deleteEmail" name="deletedEmail" value={deleteUserData.deletedEmail} onChange={handleDeleteInputChange} />
                         </div>
-                        <div class='p-2 flex flex-col place-items-center'>
-                            <label class='text-sm' htmlFor="deletePassword">Type your password:</label>
-                            <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 '  type="password" required id="deletePassword" name="deletedPassword" value={deleteUserData.deletedPassword} onChange={handleDeleteInputChange} />
+                        <div className='p-2 flex flex-col place-items-center'>
+                            <label className='text-sm' htmlFor="deletePassword">Type your password:</label>
+                            <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-4/5 focus:outline-none ring-2 ring-amber-200 '  type="password" required id="deletePassword" name="deletedPassword" value={deleteUserData.deletedPassword} onChange={handleDeleteInputChange} />
                         </div>
-                        <div class='p-5 '>
-                            <button class="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-4/5 mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit">Delete Account</button>
+                        <div className='p-5 '>
+                            <button className="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-4/5 mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit">Delete Account</button>
                         </div>
-                        <div class="text-red-500 text-sm">
+                        <div className="text-red-500 text-sm">
                             {statusMessage}
                         </div>
                         </form>

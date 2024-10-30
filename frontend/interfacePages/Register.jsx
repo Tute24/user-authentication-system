@@ -55,35 +55,35 @@ async function handleFormSubmit(e){
 
     return(
         <>
-        <div class='flex flex-col justify-center items-center min-h-screen bg-emerald-50'>
-            <div class='font-sans p-10 text-center bg-black text-white font-semibold rounded-2xl'>
-                <div class="flex justify-center items-center -mt-5 mb-3">
+        <div className='flex flex-col justify-center items-center min-h-screen bg-emerald-50'>
+            <div className='font-sans p-10 text-center bg-black text-white font-semibold rounded-2xl'>
+                <div className="flex justify-center items-center -mt-5 mb-3">
                     <h2>Register yourself on the User Authentication System!</h2>
-                    <img class='w-8 h-8' src=".././assets/lock-img.png" alt="" />
+                    <img className='w-8 h-8' src=".././assets/lock-img.png" alt="" />
                 </div>
-                <form class='flex flex-col '  onSubmit={handleFormSubmit} >
-                    <div class='p-2'>
+                <form className='flex flex-col '  onSubmit={handleFormSubmit} >
+                    <div className='p-2'>
                     <label  htmlFor="newUser">Type your full name:</label>
-                    <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' type="text" id="newUser" name="username" value={registeredUserData.username} onChange={handleInputChange} required/>
+                    <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' type="text" id="newUser" name="username" value={registeredUserData.username} onChange={handleInputChange} required/>
                     </div>
-                    <div class='p-2'>
+                    <div className='p-2'>
                     <label htmlFor="newEmail">Type a valid e-mail address:</label>
-                    <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' type="email" id="newEmail" name="email" value={registeredUserData.email} onChange={handleInputChange} required/>
+                    <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' type="email" id="newEmail" name="email" value={registeredUserData.email} onChange={handleInputChange} required/>
                     </div>
-                    <div class='p-2'>
+                    <div className='p-2'>
                     <label htmlFor="newPassword">Type your password:</label>
-                    <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' id="newPassword" name="password" type="password" value={registeredUserData.password} onChange={handleInputChange} required />
+                    <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' id="newPassword" name="password" type="password" value={registeredUserData.password} onChange={handleInputChange} required />
                     </div>
-                    <div class='p-2'>
+                    <div className='p-2'>
                     <label htmlFor="newPasswordauth">Confirm your password:</label>
-                    <input class='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' type="password" name="newPasswordauth" value={confirmPassword} onChange={handleConfirmPassword} required />
+                    <input className='mt-1 border-solid border-2 border-amber-100 bg-amber-50 rounded-2xl text-center text-black text-sm w-full focus:outline-none ring-2 ring-amber-200 ' type="password" name="newPasswordauth" value={confirmPassword} onChange={handleConfirmPassword} required />
                     </div>
-                    <div class='p-5'>
-                    <button class="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-full mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit" id="registerButton">Sign Up!</button>
+                    <div className='p-5'>
+                    <button className="bg-amber-50 rounded-full py-0.5 px-4 text-black font-bold border-amber-100 border-solid border-2 w-full mt-2.5 hover:bg-amber-200 focus:outline-none ring-2 ring-amber-200" type="submit" id="registerButton">Sign Up!</button>
                     </div>
                 </form>
                 <div>
-                    <span class="text-red-500 text-sm">{statusMessage}</span>
+                    <span className="text-red-500 text-sm">{statusMessage}</span>
                 </div>
             </div>
         </div>
