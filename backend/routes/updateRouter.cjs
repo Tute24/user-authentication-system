@@ -28,10 +28,17 @@ router.post('/update',isAuthenticated,async (req,res)=>{
 
     try{
         const authUser = await User.findOne({email})
-
         if(!authUser){
             return res.status(404).json({message: "User not found"})
-        } else if((authUser.email !== submittedEmail) && !(await bcrypt.compare(submittedPassword,authUser.password))){
+        }
+
+        const checkEmail = await User.findOne({email: submittedEmail})
+        if(checkEmail && email !== submittedEmail){
+            return res.sendStatus(403)
+        } 
+
+        
+         if((authUser.email !== submittedEmail) && !(await bcrypt.compare(submittedPassword,authUser.password))){
             authUser.email = submittedEmail
             authUser.password = await bcrypt.hash(submittedPassword,10)
             await authUser.save()
