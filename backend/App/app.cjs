@@ -6,6 +6,7 @@ const updateRouter = require('../routes/updateRouter.cjs')
 const deleteRouter = require('../routes/deleteRouter.cjs')
 const logoutRouter = require('../routes/logoutRouter.cjs')
 const adminRouter = require('../routes/adminRouter.cjs')
+const adminLogoutRouter = require('../routes/adminLogoutRouter.cjs')
 const cors = require ('cors')
 const app = express()
 const mongoose = require('mongoose')
@@ -27,6 +28,7 @@ app.use(updateRouter)
 app.use(deleteRouter)
 app.use(logoutRouter)
 app.use(adminRouter)
+app.use(adminLogoutRouter)
 
 
 app.listen(3000, ()=>{
