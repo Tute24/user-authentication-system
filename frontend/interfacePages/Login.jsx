@@ -23,7 +23,7 @@ function handleLoginInputChange(e){
 async function handleLoginSubmit(e){
     e.preventDefault()
 
-       const response = await axios.post('http://localhost:3000/login',loginUserData)
+       const response = await axios.post('/login',loginUserData)
        const token = response.data.token
        if(!token){
         setStatusMessage("Email e/ou senha incorretos. Usuário não autorizado!")

@@ -13,7 +13,7 @@ const mongoose = require('mongoose')
 const { verify } = require('jsonwebtoken')
 require('dotenv').config()
 
-mongoose.connect('mongodb://localhost:27017/authdb',{
+mongoose.connect(process.env.MONGODB_URI,{
     useNewUrlParser: true,
     useUnifiedTopology:true,
 })
@@ -31,6 +31,4 @@ app.use(adminRouter)
 app.use(adminLogoutRouter)
 
 
-app.listen(3000, ()=>{
-    console.log('Server initialized.')
-})
+module.exports = app
