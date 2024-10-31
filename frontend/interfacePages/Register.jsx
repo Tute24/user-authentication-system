@@ -59,7 +59,7 @@ async function handleFormSubmit(e){
             <div className='font-sans p-10 text-center bg-black text-white font-semibold rounded-2xl'>
                 <div className="flex justify-center items-center -mt-5 mb-3">
                     <h2>Register yourself on the User Authentication System!</h2>
-                    <img className='w-8 h-8' src=".././assets/lock-img.png" alt="" />
+                    <img className='w-8 h-8' src="././assets/lock-img.png" alt="" />
                 </div>
                 <form className='flex flex-col '  onSubmit={handleFormSubmit} >
                     <div className='p-2'>
