@@ -37,7 +37,7 @@ async function handleFormSubmit(e){
         setStatusMessage('Passwords must be equal!')
     } else{
         try{
-            const response = await axios.post('/register',registeredUserData)
+            const response = await axios.post('https://userauth-api-eight.vercel.app/register',registeredUserData)
             const token = response.data.token
             localStorage.setItem('token',JSON.stringify(token))
             navigate('/dashboard')
