@@ -31,6 +31,4 @@ app.use(adminRouter)
 app.use(adminLogoutRouter)
 
 
-app.listen(3000, ()=>{
-    console.log('Server initialized.')
-})
+module.exports = app
