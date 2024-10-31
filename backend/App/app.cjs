@@ -18,7 +18,11 @@ mongoose.connect(process.env.MONGODB_URI,{
     useUnifiedTopology:true,
 })
 
-app.use(cors())
+app.use(cors({
+    origin:["https://userauth-frontend.vercel.app/"],
+    methods: ["POST","GET"],
+    credentials: true
+}))
 app.use(express.json())
 
 app.use(loginRouter)
