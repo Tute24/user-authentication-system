@@ -18,7 +18,7 @@ export default function Admin (){
     }
 
     try{
-        const response = await axios.get('http://localhost:3000/admin',{headers:{
+        const response = await axios.get('/admin',{headers:{
             'Authorization': `Bearer: ${token}`
         }})
         const todisp = (response.data.user)
@@ -35,7 +35,7 @@ export default function Admin (){
         const token = JSON.parse(localStorage.getItem('token'))
 
         try{
-            const response = await axios.get('http://localhost:3000/adminlogout',{headers:{
+            const response = await axios.get('/adminlogout',{headers:{
                 'Authorization': `Bearer ${token}`
             }})
             localStorage.removeItem('token')
