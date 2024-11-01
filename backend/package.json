@@ -1,14 +1,11 @@
 {
   "name": "backend",
-  "private": true,
+  
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "nodemon backend/App/app.cjs"
+
+    "start": "nodemon app.cjs"
   },
   "dependencies": {
     "axios": "^1.7.7",
