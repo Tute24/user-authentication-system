@@ -7,7 +7,7 @@ const deleteRouter = require('./routes/deleteRouter.cjs')
 const logoutRouter = require('./routes/logoutRouter.cjs')
 const adminRouter = require('./routes/adminRouter.cjs')
 const adminLogoutRouter = require('./routes/adminLogoutRouter.cjs')
-const cors = require ('cors')
+const cors = require('cors')
 const app = express()
 const mongoose = require('mongoose')
 const { verify } = require('jsonwebtoken')
@@ -19,11 +19,12 @@ mongoose.connect(process.env.MONGODB_URI,{
 })
 
 app.use(cors({
-    origin:["https://userauth-frontend.vercel.app/"],
+    origin:"*",
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }))
+app.options("*", cors())
 app.use(express.json())
 
 app.use(loginRouter)
