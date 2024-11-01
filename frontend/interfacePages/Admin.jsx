@@ -18,7 +18,7 @@ export default function Admin (){
     }
 
     try{
-        const response = await axios.get('https://userauth-api-eight.vercel.app/admin',{headers:{
+        const response = await axios.get('https://user-authentication-system-jb9x.onrender.com/admin',{headers:{
             'Authorization': `Bearer: ${token}`
         }})
         const todisp = (response.data.user)
@@ -35,7 +35,7 @@ export default function Admin (){
         const token = JSON.parse(localStorage.getItem('token'))
 
         try{
-            const response = await axios.get('https://userauth-api-eight.vercel.app/adminlogout',{headers:{
+            const response = await axios.get('https://user-authentication-system-jb9x.onrender.com/adminlogout',{headers:{
                 'Authorization': `Bearer ${token}`
             }})
             localStorage.removeItem('token')

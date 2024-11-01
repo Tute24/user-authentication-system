@@ -27,7 +27,7 @@ export default function Dashboard(){
 
         if(token){
             try{
-            const getResponse = await axios.get('https://userauth-api-eight.vercel.app/dashboard',{headers:{
+            const getResponse = await axios.get('https://user-authentication-system-jb9x.onrender.com/dashboard',{headers:{
                 'Authorization': `Bearer ${token}`
                 // For the isAuthenticated middleware to check the requisition, that token has to be passed on the req's headers
             }})
@@ -114,7 +114,7 @@ function handleDeleteInputChange(e){
 
     if(token){
     try{
-        const response = await axios.post('https://userauth-api-eight.vercel.app/update',updateUserData, {headers:
+        const response = await axios.post('https://user-authentication-system-jb9x.onrender.com/update',updateUserData, {headers:
             {
                 'Authorization':`Bearer ${token}`
             }
@@ -144,7 +144,7 @@ function handleDeleteInputChange(e){
 
         if(token){
             try{
-                const response = await axios.post('https://userauth-api-eight.vercel.app/delete',deleteUserData,{headers:{
+                const response = await axios.post('https://user-authentication-system-jb9x.onrender.com/delete',deleteUserData,{headers:{
                     'Authorization': `Bearer ${token}`
                 }})
                 if(response.status === 200){
@@ -162,7 +162,7 @@ function handleDeleteInputChange(e){
 
     if(token){
         try{
-            const logout = await axios.get('https://userauth-api-eight.vercel.app/logout',{headers:{
+            const logout = await axios.get('https://user-authentication-system-jb9x.onrender.com/logout',{headers:{
                 'Authorization': `Bearer ${token}`
             }})
             if(logout.status === 200){
