@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGODB_URI,{
 })
 
 app.use(cors({
-    origin:["https://userauth-frontend.vercel.app/"],
+    origin:["https://userauth-frontend.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
