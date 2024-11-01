@@ -20,7 +20,8 @@ mongoose.connect(process.env.MONGODB_URI,{
 
 app.use(cors({
     origin:["https://userauth-frontend.vercel.app/"],
-    methods: ["POST","GET"],
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }))
 app.use(express.json())
@@ -35,5 +36,7 @@ app.use(adminRouter)
 app.use(adminLogoutRouter)
 
 
-app.listen(3000, ()=>{
-    console.log('Server initialized!')})
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server initialized on port ${port}`);
+});
