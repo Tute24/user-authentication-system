@@ -8,6 +8,7 @@ export default function Admin (){
     const [userlist, setUserList] = useState([])
 
     const navigate = useNavigate()
+    const apiUrl = process.env.REACT_APP_API_URL
 
     useEffect(()=>{
         async function fecthDB(){
@@ -18,7 +19,7 @@ export default function Admin (){
     }
 
     try{
-        const response = await axios.get('https://user-authentication-system-jb9x.onrender.com/admin',{headers:{
+        const response = await axios.get(`${apiUrl}admin`,{headers:{
             'Authorization': `Bearer: ${token}`
         }})
         const todisp = (response.data.user)
@@ -35,7 +36,7 @@ export default function Admin (){
         const token = JSON.parse(localStorage.getItem('token'))
 
         try{
-            const response = await axios.get('https://user-authentication-system-jb9x.onrender.com/adminlogout',{headers:{
+            const response = await axios.get(`${apiUrl}adminlogout`,{headers:{
                 'Authorization': `Bearer ${token}`
             }})
             localStorage.removeItem('token')

@@ -10,6 +10,7 @@ const [loginUserData,setloginUserData] = useState({
 })
 
 const navigate = useNavigate()
+const apiUrl = process.env.REACT_APP_API_URL
 
 const [statusMessage,setStatusMessage] = useState('')
 
@@ -23,7 +24,7 @@ function handleLoginInputChange(e){
 async function handleLoginSubmit(e){
     e.preventDefault()
 
-       const response = await axios.post('https://user-authentication-system-jb9x.onrender.com/login',loginUserData)
+       const response = await axios.post(`${apiUrl}login`,loginUserData)
        const token = response.data.token
        if(!token){
         setStatusMessage("Email e/ou senha incorretos. Usuário não autorizado!")
