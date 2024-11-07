@@ -15,7 +15,7 @@ const [confirmPassword,setConfirmPassword] = useState('')
 const [statusMessage,setStatusMessage] = useState('')
 
 const navigate = useNavigate()
-const apiUrl = process.env.REACT_APP_API_URL
+const apiUrl = import.meta.env.VITE_API_URL
 
 function handleConfirmPassword(e){
     setConfirmPassword(e.target.value)

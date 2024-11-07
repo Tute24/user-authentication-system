@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 export default function Login(){
    
 const [loginUserData,setloginUserData] = useState({
@@ -10,7 +11,7 @@ const [loginUserData,setloginUserData] = useState({
 })
 
 const navigate = useNavigate()
-const apiUrl = process.env.REACT_APP_API_URL
+const apiUrl = import.meta.env.VITE_API_URL
 
 const [statusMessage,setStatusMessage] = useState('')
 
