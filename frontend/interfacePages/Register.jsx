@@ -15,6 +15,7 @@ const [confirmPassword,setConfirmPassword] = useState('')
 const [statusMessage,setStatusMessage] = useState('')
 
 const navigate = useNavigate()
+const apiUrl = import.meta.env.VITE_API_URL
 
 function handleConfirmPassword(e){
     setConfirmPassword(e.target.value)
@@ -37,7 +38,7 @@ async function handleFormSubmit(e){
         setStatusMessage('Passwords must be equal!')
     } else{
         try{
-            const response = await axios.post('https://user-authentication-system-jb9x.onrender.com/register',registeredUserData)
+            const response = await axios.post(`${apiUrl}register`,registeredUserData)
             const token = response.data.token
             localStorage.setItem('token',JSON.stringify(token))
             navigate('/dashboard')

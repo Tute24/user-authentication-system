@@ -10,8 +10,6 @@ async function isAdmin(req,res, next){
         return res.status(401).json({message:"Unauthorized"})
     }
 
-
-
     jwt.verify(token,process.env.SECRET_KEY,async function(err,body){
         if(err){
             return res.status(403).json({message:"Forbidden"})
@@ -38,5 +36,18 @@ router.get('/admin', isAdmin, async (req,res)=>{
         return res.status(500)
     }
 })
+
+router.post('/giveAdmin',isAdmin,async(req,res)=>{
+    const {fetchedEmail} = req.body
+    
+    try{
+     const fetchedUser = await User.findOne({email: fetchedEmail})
+     fetchedUser.role = 'admin'
+    await fetchedUser.save()
+     res.json({message: "All good."})
+    }catch(error){
+     res.json({message:"Error good"})
+    }
+ })
 
 module.exports = router
