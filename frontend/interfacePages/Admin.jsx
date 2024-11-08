@@ -36,20 +36,20 @@ export default function Admin (){
     fecthDB()
     },[]) 
 
-    useEffect(async() => { 
-
+    useEffect(() => { 
+        async function giveAdmin(){
         const token = JSON.parse(localStorage.getItem('token'))
-
+    
         if(token){
             try{
-                const response = await axios.post(`${apiUrl}deleteUser`,emailObject,{headers:{
+                const response = await axios.post(`${apiUrl}giveAdmin`,emailObject,{headers:{
                     'Authorization': `Bearer: ${token}`
                 }})
             }catch(error){
                 console.log(error)
             }
-        }
-
+        }}
+        giveAdmin()
     }, [emailObject]);
 
     async function handleAdminLogout(){
