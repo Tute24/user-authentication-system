@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+import lockImg from '../assets/lock-img.png'
 
 export default function Register(){
 
@@ -60,7 +61,7 @@ async function handleFormSubmit(e){
             <div className='font-sans p-10 text-center bg-black text-white font-semibold rounded-2xl'>
                 <div className="flex justify-center items-center -mt-5 mb-3">
                     <h2>Register yourself on the User Authentication System!</h2>
-                    <img className='w-8 h-8' src="././assets/lock-img.png" alt="" />
+                    <img className='w-8 h-8' src={lockImg} alt="" />
                 </div>
                 <form className='flex flex-col '  onSubmit={handleFormSubmit} >
                     <div className='p-2'>
