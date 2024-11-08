@@ -1,14 +1,18 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
 export default function Admin (){
     const [statusMessage,setStatusMessage] = useState('')
     const [userlist, setUserList] = useState([])
+    const [emailObject,setEmailObject] = useState({
+        fetchedEmail:''
+    })
 
     const navigate = useNavigate()
     const apiUrl = import.meta.env.VITE_API_URL
+    const emailRef = useRef(null)
 
     useEffect(()=>{
         async function fecthDB(){
@@ -32,6 +36,22 @@ export default function Admin (){
     fecthDB()
     },[]) 
 
+    useEffect(async() => { 
+
+        const token = JSON.parse(localStorage.getItem('token'))
+
+        if(token){
+            try{
+                const response = await axios.post(`${apiUrl}deleteUser`,emailObject,{headers:{
+                    'Authorization': `Bearer: ${token}`
+                }})
+            }catch(error){
+                console.log(error)
+            }
+        }
+
+    }, [emailObject]);
+
     async function handleAdminLogout(){
         const token = JSON.parse(localStorage.getItem('token'))
 
@@ -47,6 +67,8 @@ export default function Admin (){
         }
     }
 
+   
+
     return(
         <>
         <div className='flex flex-col justify-center items-center min-h-screen bg-emerald-50'>
@@ -60,10 +82,20 @@ export default function Admin (){
                 <p className='text-amber-400 mb-3'>
                     Users List:
                 </p>
-                <ul className='flex flex-col justify-center bg-emerald-50 p-2 rounded-2xl'>
+                <ul className='flex flex-col justify-center bg-emerald-50 p-2 rounded-2xl text-sm'>
                     {userlist.map((e)=>(
-                        <li className='text-black' key={e._id}>
-                            <h3><span className='text-blue-500'> - Username:</span > "{e.username}" ; <span className='text-blue-500' >Email:</span> "{e.email}"</h3>
+                        <li className='text-black flex flex-row p-2' key={e._id}>
+                            <h3><span className='text-blue-500'> - Username:</span > "{e.username}" ; <span className='text-blue-500' >Email:</span> "<span ref={emailRef}>{e.email}</span>"</h3>
+                            <button type="button" class=" bg-red-600 text-xs rounded-full py-0.5 px-2 text-black font-bold border-red-500 border-solid border-2 -mt-1.5">Delete User</button>
+                            <button type="button" class=" bg-red-600 text-xs rounded-full py-0.5 px-2 text-black font-bold border-red-500 border-solid border-2 -mt-1.5" onClick={async()=>{
+
+                                const correspondentEmail = e.email
+                                 setEmailObject({
+                                    fetchedEmail: correspondentEmail
+                                }
+                            )
+                                
+                            }}>Give Admin</button>
                         </li>
                     ))}
                 </ul>
