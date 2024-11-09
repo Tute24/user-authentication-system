@@ -50,4 +50,17 @@ router.post('/giveAdmin',isAdmin,async(req,res)=>{
     }
  })
 
+ router.post('/deletedUser', isAdmin,async(req,res) => {
+    const {deletedEmail} = req.body
+
+    if (deletedEmail){
+        try{
+             await User.deleteOne({email: deletedEmail})
+            
+        }catch(error){
+            res.json({message: error})
+        }
+    }
+ })
+
 module.exports = router
