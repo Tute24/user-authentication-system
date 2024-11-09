@@ -12,7 +12,7 @@ Using MERN stack, this app presents a whole login, register and dashboard enviro
  - **Update infos:** In his dashboard page, the user can update his e-mail or password;
  - **Delete account:** In his dashboard page, the user can delete his account if he provides the correct password. The correspondent user will be deleted from the database;
  - **Logout:** The common logout feature, only a button away;
- - **Admin dashboard page:** If the logged user has an "admin" role on the database, he will be redirected to the admin dashboard page, where he can see all the registered users on the application and their name/email. *Note: the "admin" role needs to be configured manually on the database*;
+ - **Admin dashboard page:** If the logged user has an "admin" role on the database, he will be redirected to the admin dashboard page, where he can see all the registered users on the application and their name/email. *Note: the "admin" role needs to be configured manually on the database*. The admin user has the possibility to delete an specified user or to give him the 'admin' role;
 
 # Technologies and libraries used:
   # Back-end:
