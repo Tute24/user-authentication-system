@@ -9,6 +9,9 @@ export default function Admin (){
     const [emailObject,setEmailObject] = useState({
         fetchedEmail:''
     })
+    const [deletedUser,setDeletedUser] = useState({
+        deletedEmail: ''
+    })
 
     const navigate = useNavigate()
     const apiUrl = import.meta.env.VITE_API_URL
@@ -67,7 +70,20 @@ export default function Admin (){
         }
     }
 
-   
+    useEffect(()=>{
+        async function handleDeletedUser() {
+            const token = JSON.parse(localStorage.getItem('token'))
+
+            if(token){
+                const response = await axios.post(`${apiUrl}deletedUser`,deletedUser,{headers:{
+                    'Authorization': `Bearer ${token}`
+                }})
+            }
+        }
+        handleDeletedUser()
+    }
+    
+    ,[deletedUser])
 
     return(
         <>
@@ -86,7 +102,12 @@ export default function Admin (){
                     {userlist.map((e)=>(
                         <li className='text-black flex flex-row p-2' key={e._id}>
                             <h3><span className='text-blue-500'> - Username:</span > "{e.username}" ; <span className='text-blue-500' >Email:</span> "<span ref={emailRef}>{e.email}</span>"</h3>
-                            <button type="button" class=" bg-red-600 text-xs rounded-full py-0.5 px-2 text-black font-bold border-red-500 border-solid border-2 -mt-1.5">Delete User</button>
+                            <button type="button" class=" bg-red-600 text-xs rounded-full py-0.5 px-2 text-black font-bold border-red-500 border-solid border-2 -mt-1.5" onClick={async()=>{
+                                const deletedUserEmail = e.email
+                                setDeletedUser({
+                                    deletedEmail: deletedUserEmail
+                                })
+                            }}>Delete User</button>
                             <button type="button" class=" bg-red-600 text-xs rounded-full py-0.5 px-2 text-black font-bold border-red-500 border-solid border-2 -mt-1.5" onClick={async()=>{
 
                                 const correspondentEmail = e.email
